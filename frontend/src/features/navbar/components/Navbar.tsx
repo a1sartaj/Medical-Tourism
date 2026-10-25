@@ -1,140 +1,183 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
-import { Phone, MessageCircle, Menu, X, ArrowUpRight } from "lucide-react";
-import { NAV_LINKS, BRAND_CONFIG } from "../data/navbar";
+import { Phone, Mail, Menu, X, ArrowRight, Stethoscope } from "lucide-react";
 
-export default function Navbar() {
-    const [isOpen, setIsOpen] = useState(false);
+const NAV_LINKS = [
+    { name: "Home", href: "/" },
+    { name: "Treatments", href: "/treatments" },
+    { name: "Hospitals", href: "/hospitals" },
+    { name: "Doctors", href: "/doctors" },
+    { name: "About Us", href: "/about" },
+    { name: "Contact", href: "/contact" },
+];
+
+function NavLinksDesktop() {
     const pathname = usePathname();
 
     return (
+        <nav className="hidden md:flex items-center gap-7">
+            {NAV_LINKS.map((link) => {
+                const isActive =
+                    link.href === "/"
+                        ? pathname === "/"
+                        : pathname.startsWith(link.href);
+
+                return (
+                    <Link
+                        key={link.name}
+                        href={link.href}
+                        className={`text-xs font-semibold transition-colors duration-150 ${isActive
+                                ? "text-blue-600 font-bold"
+                                : "text-slate-600 hover:text-slate-950"
+                            }`}
+                    >
+                        {link.name}
+                    </Link>
+                );
+            })}
+        </nav>
+    );
+}
+
+function NavLinksMobile({ onClose }: { onClose: () => void }) {
+    const pathname = usePathname();
+
+    return (
+        <div className="flex flex-col gap-2 pt-2">
+            {NAV_LINKS.map((link) => {
+                const isActive =
+                    link.href === "/"
+                        ? pathname === "/"
+                        : pathname.startsWith(link.href);
+
+                return (
+                    <Link
+                        key={link.name}
+                        href={link.href}
+                        onClick={onClose}
+                        className={`px-3 py-2.5 rounded-xl text-xs font-semibold transition ${isActive
+                                ? "bg-blue-50 text-blue-600 font-bold"
+                                : "text-slate-700 hover:bg-slate-50"
+                            }`}
+                    >
+                        {link.name}
+                    </Link>
+                );
+            })}
+        </div>
+    );
+}
+
+function NavLinksFallback() {
+    return (
+        <nav className="hidden md:flex items-center gap-7">
+            {NAV_LINKS.map((link) => (
+                <span
+                    key={link.name}
+                    className="text-xs font-semibold text-slate-400 select-none"
+                >
+                    {link.name}
+                </span>
+            ))}
+        </nav>
+    );
+}
+
+export default function Navbar() {
+    const [isOpen, setIsOpen] = useState(false);
+
+    return (
         <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-slate-100">
-            <div className="bg-slate-900 text-slate-300 text-xs py-2 px-4 sm:px-8">
-                <div className="max-w-7xl mx-auto flex justify-between items-center">
-                    <p className="hidden sm:block text-slate-400">
-                        Accredited International Healthcare Assistance Desk
-                    </p>
-                    <div className="flex items-center gap-6 ml-auto sm:ml-0">
+            {/* Top Utility Bar */}
+            <div className="hidden lg:block bg-slate-900 text-slate-300 text-[11px] py-1.5 px-4 sm:px-8">
+                <div className="max-w-7xl mx-auto flex items-center justify-between">
+                    <div className="flex items-center gap-6">
                         <a
-                            href={`tel:${BRAND_CONFIG.phone}`}
-                            className="flex items-center gap-1.5 hover:text-white transition font-medium"
+                            href="tel:+919818286609"
+                            className="flex items-center gap-1.5 hover:text-white transition"
                         >
-                            <Phone className="w-3.5 h-3.5 text-blue-400" />
-                            <span>{BRAND_CONFIG.phoneDisplay}</span>
+                            <Phone className="w-3 h-3 text-blue-400" />
+                            <span>+91 9818286609</span>
                         </a>
                         <a
-                            href={BRAND_CONFIG.whatsappUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-1.5 hover:text-emerald-400 transition font-medium text-emerald-500"
+                            href="mailto:support@caresdaddy.com"
+                            className="flex items-center gap-1.5 hover:text-white transition"
                         >
-                            <MessageCircle className="w-3.5 h-3.5" />
-                            <span>WhatsApp Support</span>
+                            <Mail className="w-3 h-3 text-blue-400" />
+                            <span>support@caresdaddy.com</span>
                         </a>
                     </div>
+                    <span className="text-slate-400 font-medium">
+                        International Medical Care Assistance Desk • Saket, Delhi
+                    </span>
                 </div>
             </div>
 
-            <nav className="max-w-7xl mx-auto px-4 sm:px-8 h-20 flex items-center justify-between">
-                <Link href="/" className="flex items-center gap-2.5">
-                    <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white font-bold text-xl shadow-md shadow-blue-500/20">
-                        C+
+            {/* Main Navbar Bar */}
+            <div className="max-w-7xl mx-auto px-4 sm:px-8 h-18 flex items-center justify-between">
+                {/* Brand */}
+                <Link href="/" className="flex items-center gap-2">
+                    <div className="w-9 h-9 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-sm">
+                        <Stethoscope className="w-5 h-5" />
                     </div>
-                    <div className="flex flex-col">
-                        <span className="text-xl font-bold tracking-tight text-slate-900 leading-tight">
-                            Cares<span className="text-blue-600">Daddy</span>
-                            <span className="text-xs text-slate-400 font-normal">.com</span>
+                    <div>
+                        <span className="text-lg font-black text-slate-950 tracking-tight leading-none block">
+                            CaresDaddy<span className="text-blue-600">.com</span>
                         </span>
-                        <span className="text-[10px] text-slate-500 font-medium">
+                        <span className="text-[10px] text-slate-400 font-medium tracking-wide block">
                             Medical Tourism Platform
                         </span>
                     </div>
                 </Link>
 
-                <div className="hidden lg:flex items-center gap-1">
-                    {NAV_LINKS.map((link) => {
-                        const isActive = pathname === link.href;
-                        return (
-                            <Link
-                                key={link.href}
-                                href={link.href}
-                                className={`px-3.5 py-2 rounded-lg text-sm font-medium transition ${isActive
-                                        ? "text-blue-600 bg-blue-50/70"
-                                        : "text-slate-600 hover:text-slate-950 hover:bg-slate-50"
-                                    }`}
-                            >
-                                {link.label}
-                            </Link>
-                        );
-                    })}
-                </div>
+                {/* Desktop Navigation Links inside Suspense */}
+                <Suspense fallback={<NavLinksFallback />}>
+                    <NavLinksDesktop />
+                </Suspense>
 
-                <div className="hidden lg:flex items-center gap-3">
+                {/* Action Button */}
+                <div className="hidden sm:flex items-center gap-3">
                     <Link
                         href="/contact"
-                        className="flex items-center gap-1.5 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-lg shadow-sm transition active:scale-95"
+                        className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded-xl shadow-sm transition active:scale-95 flex items-center gap-1.5"
                     >
-                        <span>{BRAND_CONFIG.ctaText}</span>
-                        <ArrowUpRight className="w-4 h-4" />
+                        <span>Free Consultation</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
                     </Link>
                 </div>
 
+                {/* Mobile Hamburger Toggle */}
                 <button
-                    onClick={() => setIsOpen((prev) => !prev)}
-                    className="lg:hidden p-2 text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-100"
-                    aria-label="Toggle Navigation"
+                    type="button"
+                    onClick={() => setIsOpen(!isOpen)}
+                    aria-label="Toggle menu"
+                    className="p-2 rounded-xl text-slate-700 hover:bg-slate-100 transition md:hidden"
                 >
-                    {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6 text-slate-800" />}
+                    {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
                 </button>
-            </nav>
+            </div>
 
-            <AnimatePresence>
-                {isOpen && (
-                    <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        exit={{ opacity: 0, height: 0 }}
-                        className="lg:hidden border-t border-slate-100 bg-white overflow-hidden"
-                    >
-                        <div className="px-5 py-4 space-y-1">
-                            {NAV_LINKS.map((link) => (
-                                <Link
-                                    key={link.href}
-                                    href={link.href}
-                                    onClick={() => setIsOpen(false)}
-                                    className={`block px-3 py-2.5 rounded-lg text-sm font-medium ${pathname === link.href
-                                            ? "text-blue-600 bg-blue-50 font-semibold"
-                                            : "text-slate-700 hover:bg-slate-50"
-                                        }`}
-                                >
-                                    {link.label}
-                                </Link>
-                            ))}
-
-                            <div className="pt-4 mt-3 border-t border-slate-100 space-y-2">
-                                <Link
-                                    href="/contact"
-                                    onClick={() => setIsOpen(false)}
-                                    className="block text-center w-full py-3 bg-blue-600 text-white text-sm font-semibold rounded-lg shadow-sm"
-                                >
-                                    {BRAND_CONFIG.ctaText}
-                                </Link>
-                                <a
-                                    href={`tel:${BRAND_CONFIG.phone}`}
-                                    className="flex items-center justify-center gap-2 py-2.5 text-xs text-slate-600 font-medium"
-                                >
-                                    <Phone className="w-3.5 h-3.5 text-blue-600" />
-                                    Call: {BRAND_CONFIG.phoneDisplay}
-                                </a>
-                            </div>
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+            {/* Mobile Drawer */}
+            {isOpen && (
+                <div className="md:hidden border-t border-slate-100 bg-white px-4 py-4 space-y-4">
+                    <Suspense fallback={<div className="h-32" />}>
+                        <NavLinksMobile onClose={() => setIsOpen(false)} />
+                    </Suspense>
+                    <div className="pt-2 border-t border-slate-100">
+                        <Link
+                            href="/contact"
+                            onClick={() => setIsOpen(false)}
+                            className="w-full py-3 bg-blue-600 text-white text-xs font-semibold rounded-xl flex items-center justify-center gap-1.5"
+                        >
+                            <span>Free Consultation</span>
+                            <ArrowRight className="w-3.5 h-3.5" />
+                        </Link>
+                    </div>
+                </div>
+            )}
         </header>
     );
 }

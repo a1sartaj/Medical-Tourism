@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import { ShieldCheck } from "lucide-react";
 import StatCard from "@/components/common/StatCard";
 import { TRUST_STATS, ACCREDITATIONS } from "../data/trustIndicators";
@@ -8,19 +11,26 @@ export default function TrustIndicators() {
             <div className="max-w-7xl mx-auto space-y-12">
                 {/* Statistics Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {TRUST_STATS.map((stat) => (
+                    {TRUST_STATS.map((stat, idx) => (
                         <StatCard
                             key={stat.id}
                             value={stat.value}
                             label={stat.label}
                             description={stat.description}
                             icon={stat.icon}
+                            index={idx}
                         />
                     ))}
                 </div>
 
                 {/* Accreditations Row */}
-                <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8">
+                <motion.div
+                    initial={{ opacity: 0, y: 14 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, ease: "easeOut" }}
+                    className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm"
+                >
                     <div className="flex items-center gap-2 mb-6">
                         <ShieldCheck className="w-5 h-5 text-emerald-600 shrink-0" />
                         <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider">
@@ -47,7 +57,7 @@ export default function TrustIndicators() {
                             </div>
                         ))}
                     </div>
-                </div>
+                </motion.div>
             </div>
         </section>
     );

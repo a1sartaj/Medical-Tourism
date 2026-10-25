@@ -6,7 +6,7 @@ import { ChevronDown } from "lucide-react";
 import { HOME_FAQS } from "../data/faqs";
 
 export default function FAQAccordion() {
-    const [openId, setOpenId] = useState<string | null>(HOME_FAQS[0].id);
+    const [openId, setOpenId] = useState<string | null>(HOME_FAQS[0]?.id ?? null);
 
     const toggleFAQ = (id: string) => {
         setOpenId((prev) => (prev === id ? null : id));
@@ -14,13 +14,21 @@ export default function FAQAccordion() {
 
     return (
         <div className="max-w-3xl mx-auto space-y-3">
-            {HOME_FAQS.map((faq) => {
+            {HOME_FAQS.map((faq, idx) => {
                 const isOpen = openId === faq.id;
 
                 return (
-                    <div
+                    <motion.div
                         key={faq.id}
-                        className={`rounded-2xl border transition-all duration-200 overflow-hidden ${isOpen
+                        initial={{ opacity: 0, y: 12 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{
+                            duration: 0.3,
+                            delay: idx * 0.04,
+                            ease: "easeOut",
+                        }}
+                        className={`rounded-2xl border transition-colors duration-200 overflow-hidden ${isOpen
                                 ? "bg-white border-blue-500/50 shadow-md shadow-blue-500/5"
                                 : "bg-white/80 border-slate-200/90 hover:border-slate-300"
                             }`}
@@ -59,7 +67,7 @@ export default function FAQAccordion() {
                                 </motion.div>
                             )}
                         </AnimatePresence>
-                    </div>
+                    </motion.div>
                 );
             })}
         </div>

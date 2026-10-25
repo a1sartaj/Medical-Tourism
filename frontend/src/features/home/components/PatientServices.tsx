@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { ArrowRight, PlaneTakeoff } from "lucide-react";
 import { PATIENT_SERVICES } from "../data/patientServices";
 
@@ -7,7 +10,13 @@ export default function PatientServices() {
         <section className="py-20 sm:py-24 px-4 sm:px-8 bg-white border-t border-slate-200/70">
             <div className="max-w-7xl mx-auto space-y-12">
                 {/* Header */}
-                <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <motion.div
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.35, ease: "easeOut" }}
+                    className="flex flex-col md:flex-row md:items-end justify-between gap-4"
+                >
                     <div className="space-y-2 max-w-2xl">
                         <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-100 text-blue-700 text-xs font-semibold rounded-full">
                             <PlaneTakeoff className="w-3.5 h-3.5" />
@@ -17,7 +26,7 @@ export default function PatientServices() {
                             International Patient Support Services
                         </h2>
                         <p className="text-sm text-slate-600 leading-relaxed">
-                            Hum non-clinical aur travel logistics ko aasan banate hain taaki international patients aur unki family sirf health aur recovery par focus kar sake.
+                            We streamline non-clinical travel and hospital administrative logistics so international patients and their families can focus entirely on health and recovery.
                         </p>
                     </div>
 
@@ -28,20 +37,29 @@ export default function PatientServices() {
                         <span>Explore All Services</span>
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </Link>
-                </div>
+                </motion.div>
 
                 {/* Services Grid (8 Cards) */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {PATIENT_SERVICES.map((service) => {
+                    {PATIENT_SERVICES.map((service, idx) => {
                         const Icon = service.icon;
                         return (
-                            <div
+                            <motion.div
                                 key={service.id}
+                                initial={{ opacity: 0, y: 14 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{
+                                    duration: 0.35,
+                                    delay: idx * 0.05,
+                                    ease: "easeOut",
+                                }}
+                                whileHover={{ y: -3 }}
                                 className="group bg-slate-50/70 hover:bg-white rounded-2xl border border-slate-200/80 p-6 transition-all duration-300 hover:shadow-lg hover:border-blue-500/40 flex flex-col justify-between"
                             >
                                 <div className="space-y-4">
                                     <div className="flex items-center justify-between">
-                                        <div className="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center group-hover:scale-105 transition-transform">
+                                        <div className="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center transition-transform">
                                             <Icon className="w-6 h-6" />
                                         </div>
                                         {service.badge && (
@@ -60,12 +78,15 @@ export default function PatientServices() {
                                 </div>
 
                                 <div className="pt-4 mt-4 border-t border-slate-100 flex items-center text-xs font-semibold text-blue-600 gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                                    <Link href={`/patient-services#${service.id}`} className="hover:underline flex items-center gap-1">
+                                    <Link
+                                        href={`/patient-services#${service.id}`}
+                                        className="hover:underline flex items-center gap-1"
+                                    >
                                         <span>Learn more</span>
                                         <ArrowRight className="w-3.5 h-3.5" />
                                     </Link>
                                 </div>
-                            </div>
+                            </motion.div>
                         );
                     })}
                 </div>

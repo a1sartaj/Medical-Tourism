@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { Check, X, ArrowUpRight, BedDouble, Hotel } from "lucide-react";
 import {
     TREATMENT_PACKAGES,
@@ -22,7 +23,7 @@ export default function PackagePricingGrid() {
     return (
         <div className="space-y-8">
             {/* Currency Selector Bar */}
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
                 <div>
                     <span className="text-xs font-bold text-slate-900 block">
                         Select Preferred Currency
@@ -32,28 +33,38 @@ export default function PackagePricingGrid() {
                     </span>
                 </div>
 
-                <div className="flex items-center gap-1.5 bg-white p-1 rounded-xl border border-slate-200 shadow-sm">
+                <div className="flex items-center gap-1.5 bg-slate-100 p-1 rounded-xl border border-slate-200/80">
                     {CURRENCY_OPTIONS.map((c) => (
-                        <button
+                        <motion.button
                             key={c.code}
                             type="button"
+                            whileTap={{ scale: 0.96 }}
                             onClick={() => setSelectedCurrency(c)}
                             className={`px-3 py-1.5 rounded-lg text-xs font-bold transition ${selectedCurrency.code === c.code
                                     ? "bg-blue-600 text-white shadow-sm"
-                                    : "text-slate-600 hover:text-slate-950 hover:bg-slate-100"
+                                    : "text-slate-600 hover:text-slate-950 hover:bg-white/80"
                                 }`}
                         >
                             {c.code} ({c.symbol})
-                        </button>
+                        </motion.button>
                     ))}
                 </div>
             </div>
 
             {/* Package Cards Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {TREATMENT_PACKAGES.map((pkg) => (
-                    <div
+                {TREATMENT_PACKAGES.map((pkg, idx) => (
+                    <motion.div
                         key={pkg.id}
+                        initial={{ opacity: 0, y: 14 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{
+                            duration: 0.35,
+                            delay: idx * 0.08,
+                            ease: "easeOut",
+                        }}
+                        whileHover={{ y: -4 }}
                         className="bg-white rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-xl hover:border-blue-500/40 transition-all duration-300 flex flex-col justify-between"
                     >
                         <div className="p-6 space-y-5">
@@ -132,7 +143,7 @@ export default function PackagePricingGrid() {
                                 <ArrowUpRight className="w-4 h-4" />
                             </Link>
                         </div>
-                    </div>
+                    </motion.div>
                 ))}
             </div>
         </div>

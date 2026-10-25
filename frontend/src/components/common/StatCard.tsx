@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import type { LucideIcon } from "lucide-react";
 
 interface StatCardProps {
@@ -5,6 +8,7 @@ interface StatCardProps {
     label: string;
     description?: string;
     icon: LucideIcon;
+    index?: number;
 }
 
 export default function StatCard({
@@ -12,9 +16,17 @@ export default function StatCard({
     label,
     description,
     icon: Icon,
+    index = 0,
 }: StatCardProps) {
     return (
-        <div className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col justify-between">
+        <motion.div
+            initial={{ opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.35, delay: index * 0.08, ease: "easeOut" }}
+            whileHover={{ y: -3 }}
+            className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col justify-between"
+        >
             <div className="flex items-center justify-between mb-4">
                 <div className="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
                     <Icon className="w-6 h-6" />
@@ -31,6 +43,6 @@ export default function StatCard({
                     </p>
                 )}
             </div>
-        </div>
+        </motion.div>
     );
 }
