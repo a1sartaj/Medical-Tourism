@@ -128,7 +128,7 @@ export default function HospitalsPageView({
                             </p>
                         </div>
                     ) : (
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                             {filteredHospitals.map((hosp, idx) => (
                                 <HospitalCard key={hosp.id} hospital={hosp} index={idx} />
                             ))}

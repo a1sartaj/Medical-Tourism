@@ -24,7 +24,7 @@ export default function WhyChooseUs() {
                         Why Choose CaresDaddy.com?
                     </h2>
                     <p className="text-sm text-slate-600 leading-relaxed">
-                        We provide structured, non-clinical travel and administrative support to make receiving medical treatment abroad clear, dependable, and manageable[cite: 1].
+                        We provide structured, non-clinical travel and administrative support to make receiving medical treatment abroad clear, dependable, and manageable.
                     </p>
                 </motion.div>
 
@@ -76,7 +76,7 @@ export default function WhyChooseUs() {
                             Important Medical Notice
                         </h4>
                         <p className="text-xs text-slate-600 leading-relaxed">
-                            CaresDaddy.com operates strictly as an international healthcare travel facilitator and does not independently provide medical treatment, clinical diagnoses, or guarantees regarding healthcare outcomes[cite: 1]. All medical assessments, surgical eligibility decisions, and clinical care plans remain solely under the authority of licensed healthcare professionals and treating hospital teams[cite: 1].
+                            CaresDaddy.com operates strictly as an international healthcare travel facilitator and does not independently provide medical treatment, clinical diagnoses, or guarantees regarding healthcare outcomes. All medical assessments, surgical eligibility decisions, and clinical care plans remain solely under the authority of licensed healthcare professionals and treating hospital teams.
                         </p>
                     </div>
                 </motion.div>

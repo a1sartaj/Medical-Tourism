@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, Building2 } from "lucide-react";
-import HospitalCard from "./HospitalCard";
-import { FEATURED_HOSPITALS } from "../data/featuredHospitals";
+import { HOSPITALS_DATA } from "@/features/hospitals/data/hospitalsData";
+import HospitalCard from "@/features/hospitals/components/HospitalCard";
 
 export default function FeaturedHospitals() {
     return (
@@ -31,7 +31,7 @@ export default function FeaturedHospitals() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-                    {FEATURED_HOSPITALS.map((hospital, index) => (
+                    {HOSPITALS_DATA.slice(0, 3).map((hospital, index) => (
                         <HospitalCard
                             key={hospital.id}
                             hospital={hospital}

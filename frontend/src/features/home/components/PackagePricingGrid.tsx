@@ -133,10 +133,10 @@ export default function PackagePricingGrid() {
                             </div>
                         </div>
 
-                        {/* CTA */}
+                        {/* Clean Direct Link to Contact */}
                         <div className="p-6 pt-0">
                             <Link
-                                href={`/contact?package=${pkg.id}`}
+                                href="/contact"
                                 className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs rounded-xl shadow-sm transition active:scale-95 flex items-center justify-center gap-1.5"
                             >
                                 <span>Request Personalized Estimate</span>

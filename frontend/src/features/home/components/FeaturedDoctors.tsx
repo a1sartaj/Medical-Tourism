@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, UserCheck } from "lucide-react";
-import DoctorCard from "./DoctorCard";
-import { FEATURED_DOCTORS } from "../data/featuredDoctors";
+import { DOCTORS_DATA } from "@/features/doctors/data/doctorsData";
+import DoctorCard from "@/features/doctors/components/DoctorCard";
 
 export default function FeaturedDoctors() {
     return (
@@ -32,8 +32,8 @@ export default function FeaturedDoctors() {
                 </div>
 
                 {/* Doctor Grid (4 items) */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {FEATURED_DOCTORS.map((doctor, index) => (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {DOCTORS_DATA.slice(0, 3).map((doctor, index) => (
                         <DoctorCard key={doctor.id} doctor={doctor} index={index} />
                     ))}
                 </div>

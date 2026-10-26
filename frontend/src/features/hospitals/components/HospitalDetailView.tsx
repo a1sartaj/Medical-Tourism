@@ -36,6 +36,7 @@ export default function HospitalDetailView({
 }) {
     const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
 
+
     // Flatten treatments for easy passing to inquiry dropdown
     const allTreatments = hospital.specialties.flatMap((s) => s.treatments);
 
@@ -509,7 +510,7 @@ export default function HospitalDetailView({
                     {/* Section 12: Inquiry Form */}
                     <div
                         id="inquiry"
-                        className="bg-white p-6 rounded-2xl border border-slate-200 shadow-md sticky top-24 space-y-4"
+                        className="bg-white p-6 rounded-2xl border border-slate-200 shadow-md sticky top-30 space-y-4"
                     >
                         <div>
                             <h3 className="text-base font-bold text-slate-900">

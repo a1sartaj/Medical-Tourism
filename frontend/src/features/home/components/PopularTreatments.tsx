@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, Sparkles } from "lucide-react";
-import TreatmentCard from "./TreatmentCard";
-import { POPULAR_TREATMENTS } from "../data/popularTreatments";
+import { TREATMENTS_DATA } from "@/features/treatments/data/treatmentsData";
+import TreatmentCard from "@/features/treatments/components/TreatmentCard";
 
 export default function PopularTreatments() {
     return (
@@ -33,7 +33,7 @@ export default function PopularTreatments() {
 
                 {/* Treatments Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-                    {POPULAR_TREATMENTS.map((treatment, index) => (
+                    {TREATMENTS_DATA.slice(0, 6).map((treatment, index) => (
                         <TreatmentCard
                             key={treatment.id}
                             treatment={treatment}

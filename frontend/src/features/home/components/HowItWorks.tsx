@@ -1,9 +1,10 @@
+// src/features/home/components/HowItWorks.tsx
 "use client";
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Workflow } from "lucide-react";
-import { HOW_IT_WORKS_STEPS } from "../data/howItWorks";
+import { ArrowRight, Workflow, ExternalLink } from "lucide-react";
+import { HOW_IT_WORKS_OVERVIEW_STEPS } from "@/features/howItWorks/data/howItWorksData";
 
 export default function HowItWorks() {
     return (
@@ -31,7 +32,7 @@ export default function HowItWorks() {
 
                 {/* Steps Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative">
-                    {HOW_IT_WORKS_STEPS.map((item, idx) => {
+                    {HOW_IT_WORKS_OVERVIEW_STEPS.map((item, idx) => {
                         const Icon = item.icon;
                         return (
                             <motion.div
@@ -52,7 +53,7 @@ export default function HowItWorks() {
                                         <span className="text-2xl font-black text-slate-300 group-hover:text-blue-600 transition-colors font-mono">
                                             {item.step}
                                         </span>
-                                        <div className="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center transition-transform">
+                                        <div className="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
                                             <Icon className="w-6 h-6" />
                                         </div>
                                     </div>
@@ -65,38 +66,39 @@ export default function HowItWorks() {
                                     </p>
                                 </div>
 
-                                <div className="pt-6 mt-6 border-t border-slate-100 flex items-center text-xs font-semibold text-blue-600 gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                                    <span>Step {item.step} verified step</span>
+                                <div className="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-blue-600">
+                                    <span>Step {item.step}</span>
+                                    <Link
+                                        href="/how-it-works"
+                                        className="inline-flex items-center gap-1 hover:underline text-slate-500 hover:text-blue-600"
+                                    >
+                                        <span>Read Details</span>
+                                        <ArrowRight className="w-3.5 h-3.5" />
+                                    </Link>
                                 </div>
                             </motion.div>
                         );
                     })}
                 </div>
 
-                {/* CTA Bar */}
-                <motion.div
-                    initial={{ opacity: 0, y: 12 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.35, delay: 0.1, ease: "easeOut" }}
-                    className="bg-slate-900 text-white rounded-3xl p-8 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl"
-                >
-                    <div className="space-y-1 text-center md:text-left">
-                        <h3 className="text-xl sm:text-2xl font-bold">
-                            Ready to begin your medical consultation?
-                        </h3>
-                        <p className="text-xs text-slate-400">
-                            Submit your inquiry or reports for an initial clinical estimate from partner hospitals.
-                        </p>
-                    </div>
+                {/* Action Link to Full Timeline Page & Free Quote */}
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+                    <Link
+                        href="/how-it-works"
+                        className="w-full sm:w-auto px-6 py-3.5 bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-xs rounded-xl transition flex items-center justify-center gap-2"
+                    >
+                        <span>Explore Complete Day-by-Day Pathway</span>
+                        <ExternalLink className="w-4 h-4 text-slate-500" />
+                    </Link>
+
                     <Link
                         href="/contact"
-                        className="px-6 py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs rounded-xl transition shadow-md active:scale-95 flex items-center gap-2 shrink-0"
+                        className="w-full sm:w-auto px-6 py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs rounded-xl transition shadow-md flex items-center justify-center gap-2"
                     >
-                        <span>Start Free Consultation</span>
+                        <span>Get Free Assessment Quote</span>
                         <ArrowRight className="w-4 h-4" />
                     </Link>
-                </motion.div>
+                </div>
             </div>
         </section>
     );

@@ -1,4 +1,4 @@
-export interface ServiceStep {
+export interface ServiceJourneyStep {
     step: string;
     title: string;
     description: string;
@@ -9,152 +9,159 @@ export interface AccommodationOption {
     id: string;
     name: string;
     type: string;
-    distanceToHospital: string;
-    indicativePrice: string;
-    features: string[];
+    distance: string;
+    priceRange: string;
+    amenities: string[];
 }
 
-export const JOURNEY_STEPS: ServiceStep[] = [
+export interface ServiceFAQ {
+    question: string;
+    answer: string;
+}
+
+export const JOURNEY_STEPS: ServiceJourneyStep[] = [
     {
         step: "01",
         title: "Before Arrival & Case Evaluation",
         description:
-            "Review of clinical files and imaging, facilitating second opinions and receiving itemized hospital quotation letters before you book international flights.",
+            "Digital report collection, doctor matching, receiving official hospital estimates, and issuance of the Medical Visa invitation letter.",
         deliverables: [
-            "Diagnostic report evaluation with department heads",
-            "Official hospital cost and length-of-stay estimates",
-            "Medical Visa (FRRO) assistance letter coordination",
+            "Review of diagnosis by senior hospital consultants",
+            "Itemized cost estimate & procedure duration sheet",
+            "Official hospital letter for Visa processing",
         ],
     },
     {
         step: "02",
         title: "Arrival & Hospital Consultation",
         description:
-            "Terminal meet-and-greet at Delhi Airport (DEL), transfer to sanitised accommodation, and accompanied admission into the hospital's international lounge.",
+            "Direct airport pickup, check-in at accommodation, and escorted in-person evaluation at the hospital's international desk.",
         deliverables: [
-            "Direct airport transfer with luggage assistance",
-            "Dedicated case manager accompanying initial OP registration",
-            "In-person clinical evaluations and baseline investigations",
+            "Terminal 3 airport pickup in sanitized private vehicle",
+            "Assistance with local SIM card and currency exchange",
+            "Consultant meeting and baseline diagnostic tests",
         ],
     },
     {
         step: "03",
         title: "Treatment Scheduling & Inpatient Care",
         description:
-            "Clinical admission, surgical procedures, and post-operative recovery managed entirely by the hospital's surgical and intensive care teams.",
+            "Hospital room admission, surgical intervention, and post-operative monitoring conducted entirely by the hospital clinical team.",
         deliverables: [
-            "Bed admission in private or deluxe suites",
-            "Liaison between attending clinicians and family members",
-            "Daily administrative coordination and dietary adjustments",
+            "Admission into private/deluxe inpatient room",
+            "Daily coordinator assistance for language & dietary needs",
+            "Regular clinical briefings with patient attendants",
         ],
     },
     {
         step: "04",
-        title: "Discharge Coordination & Safe Recovery",
+        title: "Discharge Coordination & Recovery",
         description:
-            "Review of surgical discharge summary, prescription medication packages, and step-down recovery monitoring in nearby verified apartments.",
+            "Hospital discharge clearance, complete summary report handover, take-home medication guidance, and rest period monitoring.",
         deliverables: [
-            "Pharmacy and surgical discharge briefing",
-            "Post-operative follow-up appointments and dressing changes",
-            "Mobility and fit-to-fly clinical verification",
+            "Final itemized billing settlement directly with hospital",
+            "Discharge summary and imaging records compilation",
+            "Post-operative dressing and checkups coordination",
         ],
     },
     {
         step: "05",
-        title: "Return Travel & Continuity of Care",
+        title: "Return Travel & Follow-Up Communication",
         description:
-            "Airport departure assistance and post-return digital communications connecting your local home physician with the operating hospital surgeon.",
+            "Fit-to-Fly certificate issuance, airport drop-off, and ongoing teleconsultation support after you return home.",
         deliverables: [
-            "Fit-to-Fly certificate issuance from the chief surgeon",
-            "Transfer to DEL Terminal 3 with wheelchair support if needed",
-            "Ongoing teleconsultation and medical report handoffs",
+            "Doctor-certified Fit-to-Fly clearance",
+            "Comfortable return airport transfer",
+            "Digital telemedicine reviews with your operating surgeon",
         ],
     },
 ];
 
-export const VISA_CHECKLIST = [
+export const VISA_DOCUMENTS = [
     {
         title: "Valid International Passport",
-        detail: "Must possess at least 6 months validity with minimum 2 blank visa endorsement pages.",
+        detail: "Must have at least 6 months validity and minimum 2 blank pages.",
     },
     {
         title: "Official Hospital Visa Invitation Letter",
         detail:
-            "Issued on partner hospital letterhead with unique FRRO reference, identifying the patient and accompanying medical attendant.",
+            "Issued by our accredited partner hospital on official letterhead stating procedure, doctor name, and passport numbers.",
     },
     {
         title: "Recent Medical Records",
-        detail: "Diagnostic reports, lab summaries, and referring doctor notes validating procedure necessity.",
+        detail:
+            "Diagnostic test results, scans, and referring doctor notes validating the need for specialized care.",
     },
     {
-        title: "Proof of Financial Capability",
-        detail: "Recent bank statements demonstrating funds to cover medical estimates and living expenses.",
+        title: "Proof of Financial Funds",
+        detail:
+            "Recent bank statement or sponsorship certificate showing sufficient funds for hospital tariff and local stay.",
     },
 ];
 
-export const ACCOMMODATIONS: AccommodationOption[] = [
+export const ACCOMMODATION_LIST: AccommodationOption[] = [
     {
         id: "acc-1",
         name: "Svelte Medical Suites & Serviced Residences",
-        type: "Serviced Apartment (Kitchenette Included)",
-        distanceToHospital: "800m from Max Hospital, Saket",
-        indicativePrice: "$45 – $75 / night",
-        features: [
-            "Wheelchair-accessible corridors and elevators",
-            "Private kitchenette for customized dietary cooking",
-            "Daily sanitisation and laundry services",
+        type: "Serviced Apartment with Kitchenette",
+        distance: "800 meters from Max Hospital, Saket",
+        priceRange: "$45 – $75 / night",
+        amenities: [
+            "Private kitchen for cooking customized diets",
+            "Wheelchair-friendly elevators and walk-in showers",
+            "Daily linen change and housekeeping",
         ],
     },
     {
         id: "acc-2",
         name: "Sheraton New Delhi Hotel",
-        type: "5-Star Full Service",
-        distanceToHospital: "1.2 km from Max Hospital, Saket",
-        indicativePrice: "$90 – $140 / night",
-        features: [
-            "24/7 concierge and multi-lingual guest desks",
-            "24-hour on-call medical room assistance",
-            "Dedicated room service with international dietary options",
+        type: "5-Star Luxury Full Service",
+        distance: "1.2 km from Max Hospital, Saket",
+        priceRange: "$95 – $145 / night",
+        amenities: [
+            "24/7 on-call medical assistance room",
+            "Multi-lingual concierge (Arabic, French, English)",
+            "Room service with customizable international meals",
         ],
     },
     {
         id: "acc-3",
         name: "Saket International Guest House",
-        type: "Economy Patient Lodge",
-        distanceToHospital: "400m walking distance to hospital gates",
-        indicativePrice: "$25 – $40 / night",
-        features: [
-            "Direct attendant room options with twin beds",
+        type: "Budget Patient Attendant Lodge",
+        distance: "400 meters walking distance",
+        priceRange: "$25 – $40 / night",
+        amenities: [
+            "Twin beds suitable for patient and attendant",
             "High-speed Wi-Fi and direct coordinator support",
-            "Close proximity to local pharmacies and grocery stores",
+            "Close to pharmacies and 24/7 grocery markets",
         ],
     },
 ];
 
-export const PATIENT_SERVICES_FAQS = [
+export const PATIENT_SERVICES_FAQS: ServiceFAQ[] = [
     {
         question: "Does CaresDaddy guarantee the approval of my Indian Medical Visa?",
         answer:
-            "No. Visa approvals are granted exclusively by the Ministry of External Affairs and Indian Embassies/Consulates. We provide the mandatory formal hospital invitation letter and verify that your paperwork meets official FRRO guidelines, but the statutory sovereign decision remains with the consular authority.",
+            "No. We provide the official hospital invitation letter required by embassies and guide you through the document checklist. However, final visa approval rests solely with the Government of India and the respective Indian Embassy or Consulate.",
     },
     {
-        question: "Who makes clinical decisions regarding my treatment and discharge?",
+        question: "Who takes medical decisions during my stay and treatment?",
         answer:
-            "All surgical techniques, medications, inpatient stays, and discharge dates are determined solely by the treating hospital consultant and chief clinical board. CaresDaddy provides non-clinical administrative, logistics, and translation facilitation.",
+            "All clinical decisions—including diagnosis confirmation, surgical approaches, medication, and discharge readiness—remain exclusively with the licensed medical team at the partner hospital. CaresDaddy facilitates purely administrative, travel, and translation logistics.",
     },
     {
-        question: "Are language interpreter services free or charged separately?",
+        question: "Are interpreter services free of charge?",
         answer:
-            "Routine hospital-based interpretation (Arabic, Russian, French) during morning rounds is generally included through partner hospital international desks. Full-day personal escort interpreters for shopping or personal outings can be arranged upon request for an optional fee.",
+            "In-hospital clinical interpretation (Arabic, Russian, French) during morning doctor rounds is provided by the hospital's international patient desk at no extra charge. Full-time personal companion interpreters can be booked separately upon request.",
     },
     {
-        question: "How does airport transportation work upon arrival in Delhi?",
+        question: "How is the airport pickup arranged upon arrival?",
         answer:
-            "A designated coordinator meets you at the International Arrivals gate of Terminal 3, Indira Gandhi International Airport (DEL) with a patient name placard. You are transported in an air-conditioned vehicle directly to your accommodation or hospital emergency admission desk.",
+            "Once you share your flight itinerary, our team assigns a driver and case manager who will wait at the International Arrival Gate of Terminal 3 (Delhi Airport) with your name placard to take you directly to your accommodation or hospital.",
     },
     {
-        question: "Can accommodation be booked close to the hospital before arrival?",
+        question: "Can I receive an estimate before booking flights?",
         answer:
-            "Yes. We coordinate reservations at verified serviced apartments and hotels located within 500m to 1.5km of partner hospitals in Saket, South Delhi, and Gurugram, ensuring accessible facilities and kitchenette provisions for accompanying families.",
+            "Yes. Once you submit your current diagnostic scans and medical reports, we coordinate with the hospital to provide you with an itemized written estimate and estimated length of stay before you make any travel arrangements.",
     },
 ];

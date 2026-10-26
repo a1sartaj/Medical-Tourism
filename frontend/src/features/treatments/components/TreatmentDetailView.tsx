@@ -331,7 +331,7 @@ export default function TreatmentDetailView({
                 {/* Sidebar Sticky Column */}
                 <aside className="lg:col-span-4 space-y-8">
                     {/* 24. Inquiry Form */}
-                    <div id="inquiry" className="bg-white p-6 rounded-2xl border border-slate-200 shadow-md sticky top-24 space-y-4">
+                    <div id="inquiry" className="bg-white p-6 rounded-2xl border border-slate-200 shadow-md sticky top-30 space-y-4">
                         <div>
                             <h3 className="text-base font-bold text-slate-900">Request Cost Estimate</h3>
                             <p className="text-xs text-slate-500">Submit your inquiries or medical summaries for direct hospital evaluation.</p>

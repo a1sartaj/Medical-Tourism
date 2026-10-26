@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { BookOpen, ArrowRight } from "lucide-react";
-import BlogCard from "./BlogCard";
-import { LATEST_BLOGS } from "../data/latestBlogs";
+import BlogCard from "@/features/blog/components/BlogCard";
+import { LATEST_BLOGS } from "@/features/blog/data/latestBlogs";
 
 export default function LatestBlogs() {
+    const previewPosts = LATEST_BLOGS.slice(0, 3);
+
     return (
         <section className="py-20 sm:py-24 px-4 sm:px-8 bg-slate-50 border-t border-slate-200/70">
             <div className="max-w-7xl mx-auto space-y-12">
@@ -33,7 +35,7 @@ export default function LatestBlogs() {
 
                 {/* Blog Cards Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {LATEST_BLOGS.map((post, idx) => (
+                    {previewPosts.map((post, idx) => (
                         <BlogCard key={post.id} post={post} index={idx} />
                     ))}
                 </div>
