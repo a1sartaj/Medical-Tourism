@@ -177,7 +177,7 @@ export default function BlogDetails({ post }: { post: BlogPostItem }) {
             <div className="max-w-7xl mx-auto py-14 px-4 sm:px-8 grid grid-cols-1 lg:grid-cols-12 gap-10">
                 {/* Left Sticky Table of Contents */}
                 <aside className="hidden lg:block lg:col-span-3 space-y-6">
-                    <div className="sticky top-24 bg-white p-6 rounded-2xl border border-slate-200/90 shadow-sm space-y-4">
+                    <div className="sticky top-30 bg-white p-6 rounded-2xl border border-slate-200/90 shadow-sm space-y-4">
                         <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-900 border-b border-slate-100 pb-3">
                             <Bookmark className="w-4 h-4 text-blue-600" />
                             <span>Table of Contents</span>
@@ -269,7 +269,7 @@ export default function BlogDetails({ post }: { post: BlogPostItem }) {
 
                 {/* Right Sticky Consultation CTA Column */}
                 <aside className="lg:col-span-3 space-y-6">
-                    <div className="sticky top-24 space-y-6">
+                    <div className="sticky top-30 space-y-6">
                         {/* Consultation Card */}
                         <div className="bg-slate-900 text-white p-6 rounded-2xl border border-slate-800 shadow-xl space-y-4 text-left">
                             <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-blue-500/20 text-blue-300 text-[10px] font-bold">
