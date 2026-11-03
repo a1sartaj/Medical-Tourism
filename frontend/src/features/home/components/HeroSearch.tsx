@@ -23,7 +23,7 @@ export default function HeroSearch() {
     return (
         <form
             onSubmit={handleSearch}
-            className="w-full max-w-2xl mx-auto bg-white/95 backdrop-blur-md p-2 rounded-2xl border border-white/20 shadow-2xl shadow-slate-950/40 flex flex-col sm:flex-row items-center gap-2 transition focus-within:border-blue-400 focus-within:ring-2 focus-within:ring-blue-400/20"
+            className="w-full max-w-2xl  bg-white/95 backdrop-blur-md p-2 rounded-2xl border border-white/20 shadow-2xl shadow-slate-950/40 flex flex-col sm:flex-row items-center gap-2 transition focus-within:border-blue-400 focus-within:ring-2 focus-within:ring-blue-400/20"
         >
             <div className="flex items-center gap-3 w-full px-3 py-1.5 flex-1">
                 <Stethoscope className="w-5 h-5 text-blue-600 shrink-0" />
